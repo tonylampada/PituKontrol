@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services-config>
+	<services>
+		<service-include file-path="remoting-config.xml" />
+		<default-channels>
+			<channel ref="channel-amf" />
+		</default-channels>
+	</services>
+	<channels>
+		<channel-definition id="channel-amf"
+			class="mx.messaging.channels.AMFChannel">
+			<endpoint url="http://{server.name}:{server.port}/oraculus/messagebroker/amf"
+				class="flex.messaging.endpoints.AMFEndpoint" />
+			<properties>
+				<polling-enabled>false</polling-enabled>
+			</properties>
+		</channel-definition>
+		<!--channel-definition id="my-secure-amf"
+			class="mx.messaging.channels.SecureAMFChannel">
+			<endpoint url="https://localhost:8443/oraculus/messagebroker/amfsecure"
+				class="flex.messaging.endpoints.SecureAMFEndpoint" />
+			<properties>
+				<polling-enabled>false</polling-enabled>
+			</properties>
+		</channel-definition-->
+	</channels>
+</services-config>
