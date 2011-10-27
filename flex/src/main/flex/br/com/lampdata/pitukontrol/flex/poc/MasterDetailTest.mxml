@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="800" height="600" 
+			   xmlns:fe="http://fe.codecatalyst.com/2011/flex-extensions"
+			   xmlns:csr="com.muspace.support.csr.*"
+			   close="onClose()">
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+
+			protected function onClose():void {
+				PopUpManager.removePopUp(this);
+			}
+			
+			[Bindable]
+			private var dados : ArrayCollection = new ArrayCollection([
+				new ABC(1),
+				new ABC(2)
+			]);
+			
+			[Bindable]
+			private var dadoSelecionado : ABC;
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fe:MasterDetail  width="100%" height="100%"
+					  expandTo="{ this.width - 90 }" 
+					  expanded="{ this.dadoSelecionado != null }"
+					  direction="horizontal">
+		
+		<fe:master> 
+			<mx:DataGrid   	
+				id="grid"
+				dataProvider="{ this.dados }"
+				selectedItem="{ this.dadoSelecionado }" 
+				change=" this.dadoSelecionado = grid.selectedItem as ABC; "/>
+		</fe:master>
+		
+		<fe:detail>
+			<mx:Canvas
+				styleName="csrLiveChat"
+				width="100%" height="100%"
+				horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+				<s:VGroup>
+					<s:HGroup>
+						<s:Label text="A"/>
+						<s:TextInput text="@{dadoSelecionado.a}"/>
+					</s:HGroup>
+					<s:HGroup>
+						<s:Label text="B"/>
+						<s:TextInput text="@{dadoSelecionado.b}"/>
+					</s:HGroup>
+					<s:HGroup>
+						<s:Label text="C"/>
+						<s:TextInput text="@{dadoSelecionado.c}"/>
+					</s:HGroup>
+				</s:VGroup>
+				
+				<!--<mx:Button 
+					styleName="btnCloseChat" 
+					click="{ this.selectedCSR = null; }"
+					top="5" right="5" />
+				
+				<csr:WebCam 
+					agent="{ this.selectedCSR }" 
+					autoConnect="true" 
+					width="300" height="400" 
+					xmlns:csr="com.muspace.support.csr.*"/>
+				
+				<csr:AgentStatu
+					agent="{ this.selectedCSR }" 
+					left="320" right="20" height="100%" 
+					xmlns:csr="com.muspace.support.csr.*"/>-->
+				
+			</mx:Canvas>
+		</fe:detail>
+		
+	</fe:MasterDetail>
+</s:TitleWindow>

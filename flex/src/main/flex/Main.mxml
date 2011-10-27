@@ -5,9 +5,24 @@
 			   xmlns:view="br.com.konatus.oraculus.view.*"
 			   xmlns:parsley="http://www.spicefactory.org/parsley">
 
+	<fx:Script>
+		<![CDATA[
+			import br.com.lampdata.pitukontrol.flex.poc.MasterDetailTest;
+			
+			import mx.managers.PopUpManager;
+			protected function testMasterDetail():void {
+				PopUpManager.addPopUp(new MasterDetailTest(), this, true);
+			
+			}
+		]]>
+	</fx:Script>
+
+
 	<fx:Declarations>
 		<!--<parsley:ContextBuilder config="{OraculusContext}" description="MainContext"/>-->
 	</fx:Declarations>
-	
-	<s:Label text="Pitukinho"/>
+	<s:VGroup>
+		<s:Label text="Pitukinho"/>
+		<s:Button label="testa MasterDetail" click="testMasterDetail()"/>
+	</s:VGroup>
 </s:Application>
