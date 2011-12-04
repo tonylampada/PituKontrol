@@ -1,0 +1,19 @@
+application: pitukontrol
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+# - url: /.*
+  # script: helloworld.py
+  
+- url: /private.*
+  login: required
+  script: ce/cehandler.py
+ 
+- url: /admin.*
+  login: admin
+  script: ce/cehandler.py
+  
+- url: /public.*
+  script: ce/cehandler.py
